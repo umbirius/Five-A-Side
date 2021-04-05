@@ -1,9 +1,8 @@
 import express from "express";
+import { getFields } from '../controllers/fields.js'
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    res.send('This Works')
-});
+router.get("/", getFields)
 
 export default router

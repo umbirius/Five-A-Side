@@ -1,12 +1,12 @@
 import React from 'react'
+import MapArea from './Components/Map/MapArea'
+import Map from './Components/Map/MapArea'
 
 
 const App = () => {
     return (
         <div>
-            <h1>
-                Five a side
-            </h1>
+            <MapArea></MapArea>
         </div>
     )
 }

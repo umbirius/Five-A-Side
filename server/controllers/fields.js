@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import Field from "../models/field.js";
 
-export const getFields = async (res, req) => {
+export const getFields = async (req, res) => {
   try {
     const Fields = await Field.find();
 

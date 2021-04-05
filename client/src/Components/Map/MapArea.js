@@ -1,27 +1,49 @@
 import React from 'react'
-import { Loader } from "@googlemaps/js-api-loader"
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import dotenv from "dotenv";
 
-// loader exposes a promise and callback interface
-// default promise method is load
+dotenv.config()
 
-// const loader = new Loader({
-//     apiKey: "YOUR_API_KEY",
-//     version: "weekly",
-//     ...additionalOptions,
-//   });
-//   loader.load().then(() => {
-//     map = new google.maps.Map(document.getElementById("map"), {
-//       center: { lat: -34.397, lng: 150.644 },
-//       zoom: 8,
-//     });
-//   });
+const containerStyle = {
+  width: '1000px',
+  height: '1000px'
+};
+
+const center = {
+  lat: -3.745,
+  lng: -38.523
+};
 
   const MapArea = () => {
-      return(
-          <div>
-              <h1>GOOGLE MAP API</h1>
-          </div>
-      )
+    const { isLoaded } = useJsApiLoader({
+      id: 'google-map-script',
+      googleMapsApiKey: process.env.REACT_APP_GOOGLE_API
+    })
+  
+    const [map, setMap] = React.useState(null)
+  
+    const onLoad = React.useCallback(function callback(map) {
+      const bounds = new window.google.maps.LatLngBounds();
+      map.fitBounds(bounds);
+      setMap(map)
+    }, [])
+  
+    const onUnmount = React.useCallback(function callback(map) {
+      setMap(null)
+    }, [])
+  
+    return isLoaded ? (
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={10}
+          onLoad={onLoad}
+          onUnmount={onUnmount}
+        >
+          { /* Child components, such as markers, info windows, etc. */ }
+          <></>
+        </GoogleMap>
+    ) : <></>
   }
 
 export default MapArea

@@ -4,7 +4,10 @@ import MapArea from "./Components/Map/MapArea";
 import { Container } from "@material-ui/core";
 
 const App = () => {
-  return (
+
+
+    return (
+        
     <div>
       <Container maxWidth="lg">
         <NavBar></NavBar>

@@ -3,17 +3,25 @@ import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import dotenv from "dotenv";
 import useWindowDimensions from './windowDimensions'
 import useStyles from './styles'
+import { geolocated } from "react-geolocated";
 
 dotenv.config();
 
+
 const center = {
-  lat: -3.745,
-  lng: -38.523,
+
+    lat: -3.745,
+    lng: -38.523,
 };
 
+const mapContainerStyle = {
+  width: '400px',
+  height: '400px'
+};
 
 const MapArea = () => {
-  const mapContainerStyle = useWindowDimensions()
+ 
+  // const mapContainerStyle = useWindowDimensions()
   const classes = useStyles()
 
 

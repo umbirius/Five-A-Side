@@ -8,6 +8,8 @@ export default makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: '#ff9800',
+
   },
   search: {
     position: "relative",

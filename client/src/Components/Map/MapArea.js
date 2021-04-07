@@ -5,8 +5,8 @@ import dotenv from "dotenv";
 dotenv.config()
 
 const containerStyle = {
-  width: '1000px',
-  height: '1000px'
+  width: '1600px',
+  height: '600px'
 };
 
 const center = {
@@ -36,7 +36,7 @@ const center = {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={10}
+          zoom={5}
           onLoad={onLoad}
           onUnmount={onUnmount}
         >

@@ -1,22 +1,22 @@
 import React from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import dotenv from "dotenv";
+import useWindowDimensions from './windowDimensions'
+import useStyles from './styles'
 
 dotenv.config();
-
-const containerStyle = {
-  width: "995px",
-  height: "600px",
-};
 
 const center = {
   lat: -3.745,
   lng: -38.523,
 };
 
-const q = "seattle"
 
 const MapArea = () => {
+  const mapContainerStyle = useWindowDimensions()
+  const classes = useStyles()
+
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API,
@@ -35,10 +35,9 @@ const MapArea = () => {
   }, []);
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
+    <GoogleMap className={classes.mapArea}
+      mapContainerStyle={mapContainerStyle}
       // center={center}
-      q={q}
       zoom={5}
       onLoad={onLoad}
       onUnmount={onUnmount}

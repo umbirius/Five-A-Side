@@ -5,10 +5,12 @@ import { Container } from "@material-ui/core";
 
 const App = () => {
   return (
-    <Container maxWidth='lg'>
-      <NavBar></NavBar>
+    <div>
+      <Container maxWidth="lg">
+        <NavBar></NavBar>
+      </Container>
       <MapArea></MapArea>
-    </Container>
+    </div>
   );
 };
 

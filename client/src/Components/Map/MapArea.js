@@ -1,29 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import dotenv from "dotenv";
-import useWindowDimensions from './windowDimensions'
-import useStyles from './styles'
-import { geolocated } from "react-geolocated";
+import useWindowDimensions from "./windowDimensions";
+import useStyles from "./styles";
 
 dotenv.config();
 
-
 const center = {
-
-    lat: -3.745,
-    lng: -38.523,
+  lat: -3.745,
+  lng: -38.523,
 };
 
 const mapContainerStyle = {
-  width: '400px',
-  height: '400px'
+  width: "1170px",
+  height: "800px",
 };
 
 const MapArea = () => {
- 
-  // const mapContainerStyle = useWindowDimensions()
-  const classes = useStyles()
 
+  // const mapContainerStyle = useWindowDimensions()
+  const classes = useStyles();
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -43,7 +39,8 @@ const MapArea = () => {
   }, []);
 
   return isLoaded ? (
-    <GoogleMap className={classes.mapArea}
+    <GoogleMap
+      className={classes.mapArea}
       mapContainerStyle={mapContainerStyle}
       // center={center}
       zoom={5}

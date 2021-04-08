@@ -9,7 +9,6 @@ export default makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: '#ff9800',
-
   },
   search: {
     position: "relative",

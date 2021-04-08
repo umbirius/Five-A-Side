@@ -7,11 +7,11 @@ const App = () => {
   return (
     <Container className="main-container" maxWidth="lg">
       <NavBar></NavBar>
-      <Grid container >
-        <Grid xs={8} justify="center">
-          <MapArea></MapArea>
+      <Grid container>
+        <Grid xs={4} justify="center">
+          <div>hello</div>
         </Grid>
-        <Grid s={4} justify="center">
+        <Grid xs={8} justify="center">
           <MapArea></MapArea>
         </Grid>
       </Grid>

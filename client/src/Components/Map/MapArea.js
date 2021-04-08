@@ -12,8 +12,8 @@ const center = {
 };
 
 const mapContainerStyle = {
-  width: "400px",
-  height: "400px",
+  width: "100%",
+  height: "800px",
 };
 
 const MapArea = () => {

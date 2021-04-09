@@ -3,12 +3,13 @@ import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import dotenv from "dotenv";
 import useWindowDimensions from "./windowDimensions";
 import useStyles from "./styles";
+import Geolocation from "react-native-geolocation-service";
 
 dotenv.config();
 
 const center = {
-  lat: -3.745,
-  lng: -38.523,
+  lat: 40.728157,
+  lng: -74.077644,
 };
 
 const mapContainerStyle = {
@@ -42,7 +43,7 @@ const MapArea = () => {
     <GoogleMap
       className={classes.mapArea}
       mapContainerStyle={mapContainerStyle}
-      // center={center}
+      center={center}
       zoom={5}
       onLoad={onLoad}
       onUnmount={onUnmount}

@@ -12,8 +12,7 @@ import {
 const Field = () => {
   return (
     <div>
-      <h1> Single Field</h1>
-      <h1> Singlefield 2</h1>
+      <Card></Card> Single Field
     </div>
   );
 };

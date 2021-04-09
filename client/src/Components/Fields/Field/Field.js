@@ -9,15 +9,13 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import Field from "./Field/Field";
-
-const Fields = () => {
+const Field = () => {
   return (
     <div>
-      <h1> Fields Here</h1>
-      <Field></Field>
+      <h1> Single Field</h1>
+      <h1> Singlefield 2</h1>
     </div>
   );
 };
 
-export default Fields;
+export default Field

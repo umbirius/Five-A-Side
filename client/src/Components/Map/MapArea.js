@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import dotenv from "dotenv";
-import useWindowDimensions from "./windowDimensions";
 import useStyles from "./styles";
 import Geolocation from "react-native-geolocation-service";
 

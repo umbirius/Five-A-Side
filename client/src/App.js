@@ -5,6 +5,8 @@ import { Container, Grid } from "@material-ui/core";
 import ObjInterface from "./Components/Containers/ObjInterface/ObjInterface";
 
 const App = () => {
+  
+  document.title = 'Five A Side'
   return (
     <Container className="main-container" maxWidth="lg">
       <NavBar></NavBar>

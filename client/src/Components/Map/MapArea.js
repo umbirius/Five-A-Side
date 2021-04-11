@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import dotenv from "dotenv";
 import useStyles from "./styles";
@@ -17,8 +17,6 @@ const mapContainerStyle = {
 };
 
 const MapArea = () => {
-
-  // const mapContainerStyle = useWindowDimensions()
   const classes = useStyles();
 
   const { isLoaded } = useJsApiLoader({
@@ -26,15 +24,15 @@ const MapArea = () => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API,
   });
 
-  const [map, setMap] = React.useState(null);
+  const [map, setMap] = useState(null);
 
-  const onLoad = React.useCallback(function callback(map) {
+  const onLoad = useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds();
     map.fitBounds(bounds);
     setMap(map);
   }, []);
 
-  const onUnmount = React.useCallback(function callback(map) {
+  const onUnmount = useCallback(function callback(map) {
     setMap(null);
   }, []);
 
@@ -44,8 +42,8 @@ const MapArea = () => {
       mapContainerStyle={mapContainerStyle}
       center={center}
       zoom={5}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
+      onLoad={onLoad} //useEffect goes here?
+      onUnmount={onUnmount} //useEffect goes here?
     >
       {/* Child components, such as markers, info windows, etc. */}
       <></>

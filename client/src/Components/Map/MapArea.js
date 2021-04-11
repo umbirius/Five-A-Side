@@ -5,16 +5,30 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
+
 import dotenv from "dotenv";
 import styles from "./styles";
+import useStyles from "./styles2";
 
 dotenv.config();
 
 const libraries = ["places"];
 
 const mapContainerStyle = {
-  width: "100%",
-  height: "800px",
+  width: "100vw",
+  height: "100vh",
 };
 
 const center = {
@@ -65,6 +79,7 @@ const MapArea = () => {
 
   return (
     <div>
+      <Search></Search>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
@@ -112,3 +127,48 @@ const MapArea = () => {
 };
 
 export default MapArea;
+
+function Search() {
+  const classes = useStyles();
+
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestion,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      location: {
+        lat: () => 40.728157,
+        lng: () => -74.077644,
+      },
+      radius: 200000,
+    },
+  });
+
+  return (
+    <div className={classes.search}>
+      <Combobox
+        onSelect={(address) => {
+          console.log(address);
+        }}
+      >
+        <ComboboxInput
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+          disabled={!ready}
+          placeholder="Search for Field"
+        />
+        <ComboboxPopover>
+          {status === "OK" &&
+            data.map(({ id, description }) => (
+              <ComboboxOption key={id} value={description} />
+            ))}
+        </ComboboxPopover>
+      </Combobox>
+    </div>
+  );
+}

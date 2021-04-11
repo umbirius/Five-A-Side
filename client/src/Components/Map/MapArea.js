@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -37,6 +37,28 @@ const MapArea = () => {
   });
 
   const [markers, setMarkers] = useState([]);
+  // starts off as null and gets its marker when user selects
+  const [selected, setSelected] = useState(null);
+
+  // allows callback to always retain the same unless we change the second argument in the array
+  const onMapClick = useCallback((event) => {
+    setMarkers((current) => [
+      ...current,
+      {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+        time: new Date(),
+      },
+    ]);
+  }, []);
+
+  // useState when you want to cause rerenders, useRef when you want to use state without causing re-renders
+
+  const mapRef = useRef();
+  // used to access all map references without causing re-renders
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, []);
 
   if (loadError) return "Error Loading Maps";
   if (!isLoaded) return "Loading Maps";
@@ -48,16 +70,8 @@ const MapArea = () => {
         zoom={10}
         center={center}
         options={options}
-        onClick={(event) => {
-          setMarkers((current) => [
-            ...current,
-            {
-              lat: event.latLng.lat(),
-              lng: event.latLng.lng(),
-              time: new Date(),
-            },
-          ]);
-        }}
+        onClick={onMapClick}
+        onLoad={onMapLoad}
       >
         {markers.map((marker) => (
           <Marker
@@ -65,9 +79,12 @@ const MapArea = () => {
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               url: "/field.svg",
-              scaledSize: new window.google.maps.Size(30,30), 
-              origin: new window.google.maps.Point(0,0),
-              anchor: new window.google.maps.Point(15,15),
+              scaledSize: new window.google.maps.Size(30, 30),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 15),
+            }}
+            onClick={() => {
+              setSelected(marker);
             }}
           />
         ))}

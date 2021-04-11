@@ -85,9 +85,27 @@ const MapArea = () => {
             }}
             onClick={() => {
               setSelected(marker);
+              console.log(selected);
             }}
           />
         ))}
+        {selected ? (
+          <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
+          >
+            <div>
+              <h2>Field</h2>
+              <p>
+                <ul>Times</ul>
+                <ul>Cost</ul>
+                <ul>Days</ul>
+              </p>
+            </div>
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
     </div>
   );

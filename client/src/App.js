@@ -8,7 +8,7 @@ const App = () => {
   
   document.title = 'Five A Side'
   return (
-    <Container className="main-container" maxWidth="lg">
+    <Container className="main-container" maxWidth="lg" justify="center">
       <NavBar></NavBar>
       <Grid container>
         <Grid xs={4} justify="center">

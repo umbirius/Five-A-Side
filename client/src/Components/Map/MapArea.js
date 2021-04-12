@@ -51,6 +51,7 @@ const MapArea = () => {
   });
 
   const [markers, setMarkers] = useState([]);
+
   // starts off as null and gets its marker when user selects
   const [selected, setSelected] = useState(null);
 
@@ -74,12 +75,18 @@ const MapArea = () => {
     mapRef.current = map;
   }, []);
 
+  //pan to specific location on the map
+  const panTo = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
+
   if (loadError) return "Error Loading Maps";
   if (!isLoaded) return "Loading Maps";
 
   return (
     <div>
-      <Search></Search>
+      <Search panTo={panTo}></Search>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
@@ -128,7 +135,7 @@ const MapArea = () => {
 
 export default MapArea;
 
-function Search() {
+function Search({ panTo }) {
   const classes = useStyles();
 
   const {
@@ -136,7 +143,7 @@ function Search() {
     value,
     suggestions: { status, data },
     setValue,
-    clearSuggestion,
+    clearSuggestions,
   } = usePlacesAutocomplete({
     requestOptions: {
       location: {
@@ -150,7 +157,16 @@ function Search() {
   return (
     <div className={classes.search}>
       <Combobox
-        onSelect={(address) => {
+        onSelect={async (address) => {
+          setValue(address, false)
+          clearSuggestions()
+          try {
+            const results = await getGeocode({ address });
+            const { lat, lng } = await getLatLng(results[0]);
+            panTo({ lat, lng });
+          } catch (error) {
+            console.log(error);
+          }
           console.log(address);
         }}
       >

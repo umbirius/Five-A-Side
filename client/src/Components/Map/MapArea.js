@@ -18,11 +18,11 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import styles from "./styles";
 import useStyles from "./styles2";
 
-dotenv.config();
+// dotenv.config();
 
 const libraries = ["places"];
 
@@ -87,6 +87,7 @@ const MapArea = () => {
   return (
     <div>
       <Search panTo={panTo}></Search>
+      <Locate panTo={panTo}></Locate>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
@@ -135,6 +136,35 @@ const MapArea = () => {
 
 export default MapArea;
 
+function Locate({ panTo }) {
+  // const classes = useStyles();
+
+  return (
+    // <button className={classes.locate} onClick= {() => console.log("ere")}>
+    <button
+      onClick={() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+          console.log(position);
+        }, 
+        () => console.log("unable to retrieve"));
+        // navigator.geolocation.getCurrentPosition(
+        //   (position) => {
+        //     console.log(position);
+        //     panTo({
+        //       lat: position.coords.latitude,
+        //       lng: position.coords.longitude,
+        //     });
+        //   },
+        //   () => null,
+        //   options
+        // );
+      }}
+    >
+      <img src="field.svg" />
+    </button>
+  );
+}
+
 function Search({ panTo }) {
   const classes = useStyles();
 
@@ -158,8 +188,8 @@ function Search({ panTo }) {
     <div className={classes.search}>
       <Combobox
         onSelect={async (address) => {
-          setValue(address, false)
-          clearSuggestions()
+          setValue(address, false);
+          clearSuggestions();
           try {
             const results = await getGeocode({ address });
             const { lat, lng } = await getLatLng(results[0]);
@@ -179,10 +209,12 @@ function Search({ panTo }) {
           placeholder="Search for Field"
         />
         <ComboboxPopover>
-          {status === "OK" &&
-            data.map(({ id, description }) => (
-              <ComboboxOption key={id} value={description} />
-            ))}
+          <ComboboxList>
+            {status === "OK" &&
+              data.map(({ id, description }) => (
+                <ComboboxOption key={id} value={description} />
+              ))}
+          </ComboboxList>
         </ComboboxPopover>
       </Combobox>
     </div>

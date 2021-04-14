@@ -1,22 +1,22 @@
-import mongoose from 'mongoose'
-
+import mongoose from "mongoose";
 
 const fieldSchema = new mongoose.Schema({
+  name: String,
+  location: { lat: Number, lng: Number },
+  cost: {
+    type: Number,
+    default: 0,
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
+  rating: {
+    type: Number,
+    default: 0,
+  },
+});
 
-    name: String, 
-    location: String, 
-    cost: {
-        type: Number, 
-        default: 0
-    }, 
-    createdAt: {
-        type: Date,
-        default: new Date()
-    }
-})
+const Field = mongoose.model("Field", fieldSchema);
 
-const Field = mongoose.model('Field', fieldSchema)
-
-export default Field
-
-
+export default Field;

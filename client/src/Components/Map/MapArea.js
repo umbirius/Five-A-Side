@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -162,7 +162,7 @@ function Locate({ panTo }) {
         // );
       }}
     >
-      <img src="field.svg" />
+      <img src="field.svg"/>
     </button>
   );
 }

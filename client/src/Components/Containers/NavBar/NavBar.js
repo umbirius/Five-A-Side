@@ -1,6 +1,6 @@
 import React from "react";
 import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
+// import InputBase from '@material-ui/core/InputBase';
 import AppBar from "@material-ui/core/AppBar";
 import useStyles from "./styles";
 

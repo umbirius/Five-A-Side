@@ -143,10 +143,12 @@ function Locate({ panTo }) {
     // <button className={classes.locate} onClick= {() => console.log("ere")}>
     <button
       onClick={() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-          console.log(position);
-        }, 
-        () => console.log("unable to retrieve"));
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            console.log(position);
+          },
+          () => console.log("unable to retrieve")
+        );
         // navigator.geolocation.getCurrentPosition(
         //   (position) => {
         //     console.log(position);

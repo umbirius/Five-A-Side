@@ -1,4 +1,4 @@
-import * as api from "../api"
+import * as api from "../api/fields"
 
 export const getFields = () => async (dispatch) => {
     try {

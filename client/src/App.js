@@ -12,7 +12,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getFields());
-  });
+  }, [dispatch]);
 
   const fields = useSelector((state) => state.fields)
   console.log(fields)

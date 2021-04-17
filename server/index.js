@@ -9,11 +9,14 @@ import fieldRoutes from "./routes/fields.js"
 const app = express();
 dotenv.config()
 
-app.use('/fields', fieldRoutes)
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+
+// corse needs to be called before routes to allow origin request (see above)
+
+app.use('/fields', fieldRoutes)
 
 const PORT = process.env.PORT;
 

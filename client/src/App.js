@@ -11,7 +11,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFields);
+    dispatch(getFields());
   });
 
   const fields = useSelector((state) => state.fields)

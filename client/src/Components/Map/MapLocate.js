@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Locate({ panTo }) {
   // const classes = useStyles();
 

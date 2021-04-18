@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from "react";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 import {
   GoogleMap,
   useLoadScript,
@@ -9,8 +9,9 @@ import {
 
 import styles from "./styles";
 
-import Search from './MapSearch'
-import Locate from './MapLocate'
+import Search from "./MapSearch";
+import Locate from "./MapLocate";
+import NewField from "./MapNewField"
 
 const libraries = ["places"];
 
@@ -40,20 +41,17 @@ const MapArea = () => {
 
   const fields = useSelector((state) => state.fields);
 
-  console.log(fields)
+  console.log(fields);
 
   const [markers, setMarkers] = useState([]);
 
   // starts off as null and gets its marker when user selects
   const [selected, setSelected] = useState(null);
 
-  // capture state to create new field
-  const [newField, setNew] = useState(null)
-
   // allows callback to always retain the same unless we change the second argument in the array
   const onMapClick = useCallback((event) => {
     //change this to create field with new action
-    
+
     setMarkers((current) => [
       ...current,
       {
@@ -134,10 +132,4 @@ const MapArea = () => {
 
 export default MapArea;
 
-function NewField(){
 
-  return (
-    <button onClick={() => console.log('new field enabled')}> Create new Field</button>
-  )
-
-}

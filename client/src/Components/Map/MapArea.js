@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useRef } from "react";
+import {useSelector} from 'react-redux'
 import {
   GoogleMap,
   useLoadScript,
@@ -50,6 +51,10 @@ const MapArea = () => {
     libraries,
   });
 
+  const fields = useSelector((state) => state.fields);
+
+  console.log(fields)
+
   const [markers, setMarkers] = useState([]);
 
   // starts off as null and gets its marker when user selects
@@ -57,6 +62,8 @@ const MapArea = () => {
 
   // allows callback to always retain the same unless we change the second argument in the array
   const onMapClick = useCallback((event) => {
+    //change this to create field with new action
+    
     setMarkers((current) => [
       ...current,
       {
@@ -162,7 +169,7 @@ function Locate({ panTo }) {
         // );
       }}
     >
-      <img src="field.svg"/>
+      <img src="field.svg" />
     </button>
   );
 }

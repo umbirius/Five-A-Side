@@ -7,23 +7,10 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-
-// import dotenv from "dotenv";
 import styles from "./styles";
-import useStyles from "./styles2";
 
-// dotenv.config();
+import Search from './MapSearch'
+import Locate from './MapLocate'
 
 const libraries = ["places"];
 
@@ -146,93 +133,6 @@ const MapArea = () => {
 };
 
 export default MapArea;
-
-function Locate({ panTo }) {
-  // const classes = useStyles();
-
-  return (
-    // <button className={classes.locate} onClick= {() => console.log("ere")}>
-    <button
-      onClick={() => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            console.log(position);
-          },
-          () => console.log("unable to retrieve")
-        );
-        // navigator.geolocation.getCurrentPosition(
-        //   (position) => {
-        //     console.log(position);
-        //     panTo({
-        //       lat: position.coords.latitude,
-        //       lng: position.coords.longitude,
-        //     });
-        //   },
-        //   () => null,
-        //   options
-        // );
-      }}
-    >
-      <img src="field.svg" /> locate me
-    </button>
-  );
-}
-
-function Search({ panTo }) {
-  const classes = useStyles();
-
-  const {
-    ready,
-    value,
-    suggestions: { status, data },
-    setValue,
-    clearSuggestions,
-  } = usePlacesAutocomplete({
-    requestOptions: {
-      location: {
-        lat: () => 40.728157,
-        lng: () => -74.077644,
-      },
-      radius: 200000,
-    },
-  });
-
-  return (
-    <div className={classes.search}>
-      <Combobox
-        onSelect={async (address) => {
-          setValue(address, false);
-          clearSuggestions();
-          try {
-            const results = await getGeocode({ address });
-            const { lat, lng } = await getLatLng(results[0]);
-            panTo({ lat, lng });
-          } catch (error) {
-            console.log(error);
-          }
-          console.log(address);
-        }}
-      >
-        <ComboboxInput
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          disabled={!ready}
-          placeholder="Search for Field"
-        />
-        <ComboboxPopover>
-          <ComboboxList>
-            {status === "OK" &&
-              data.map(({ id, description }) => (
-                <ComboboxOption key={id} value={description} />
-              ))}
-          </ComboboxList>
-        </ComboboxPopover>
-      </Combobox>
-    </div>
-  );
-}
 
 function NewField(){
 

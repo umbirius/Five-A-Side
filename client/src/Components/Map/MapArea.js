@@ -60,6 +60,9 @@ const MapArea = () => {
   // starts off as null and gets its marker when user selects
   const [selected, setSelected] = useState(null);
 
+  // capture state to create new field
+  const [newField, setNew] = useState(null)
+
   // allows callback to always retain the same unless we change the second argument in the array
   const onMapClick = useCallback((event) => {
     //change this to create field with new action
@@ -95,6 +98,7 @@ const MapArea = () => {
     <div>
       <Search panTo={panTo}></Search>
       <Locate panTo={panTo}></Locate>
+      <NewField></NewField>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
@@ -169,7 +173,7 @@ function Locate({ panTo }) {
         // );
       }}
     >
-      <img src="field.svg" />
+      <img src="field.svg" /> locate me
     </button>
   );
 }
@@ -228,4 +232,12 @@ function Search({ panTo }) {
       </Combobox>
     </div>
   );
+}
+
+function NewField(){
+
+  return (
+    <button onClick={() => console.log('new field enabled')}> Create new Field</button>
+  )
+
 }

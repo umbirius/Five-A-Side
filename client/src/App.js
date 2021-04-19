@@ -19,17 +19,17 @@ const App = () => {
 
   document.title = "Five A Side";
   return (
-    <Container className="main-container" maxWidth="lg" justify="center">
-      <NavBar></NavBar>
-      <Grid container>
-        <Grid xs={4} justify="center">
-          <ObjInterface></ObjInterface>
-        </Grid>
-        <Grid xs={8} justify="center">
-          <MapArea></MapArea>
-        </Grid>
-      </Grid>
-    </Container>
+      <MapArea></MapArea>
+    // <Container className="main-container" maxWidth="100%" justify="center">
+    //   <NavBar></NavBar>
+    //   {/* <Grid container> */}
+    //     {/* <Grid xs={4} justify="center">
+    //       <ObjInterface></ObjInterface>
+    //     </Grid> */}
+    //     <Grid justify="center">
+    //     </Grid>
+    //   {/* </Grid> */}
+    // </Container>
   );
 };
 

@@ -1,11 +1,13 @@
 import React from "react";
+import useStyles from "./styles2";
+import PersonPinIcon from '@material-ui/icons/PersonPin';
 
 export default function Locate({ panTo }) {
-  // const classes = useStyles();
+  const classes = useStyles();
 
   return (
     // <button className={classes.locate} onClick= {() => console.log("ere")}>
-    <button
+    <button className={classes.locate}
       onClick={() => {
         console.log("button clicked for location set up function later");
         navigator.geolocation.getCurrentPosition(
@@ -27,7 +29,7 @@ export default function Locate({ panTo }) {
         // );
       }}
     >
-      <img src="field.svg" /> locate me
+      <PersonPinIcon style={{ fontSize: 50 }}/>
     </button>
   );
 }

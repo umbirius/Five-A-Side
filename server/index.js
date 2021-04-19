@@ -14,7 +14,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-// corse needs to be called before routes to allow origin request (see above)
+// cors needs to be called before routes to allow origin request (see)
 
 app.use('/fields', fieldRoutes)
 

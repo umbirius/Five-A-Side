@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 export default makeStyles(() => ({
   search: {
-    // position: "absolute",
+    position: "absolute",
     top: "1rem",
     left: "50%",
     transform: "translateX(-50%)",
@@ -13,10 +13,20 @@ export default makeStyles(() => ({
 
   locate: {
     position: "absolute",
-    top: "1rem",
-    right: "1rem",
+    top: "3rem",
+    right: "0rem",
     background: "none",
     border: "none",
     zIndex: "10",
+  },
+
+  newField: {
+    position: "absolute",
+    top: "7rem",
+    right: "0rem",
+    background: "none",
+    border: "none",
+    zIndex: "10",
+    color: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
   },
 }));

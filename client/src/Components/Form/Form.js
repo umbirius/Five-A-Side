@@ -4,14 +4,16 @@ import React, { useState } from "react";
 // import reducer methods from react-redux
 
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
+import useStyles from "./styles";
 
 const Form = () => {
   //   const [fieldData, setFieldData] = useState({});
+  const classes = useStyles()
 
   return (
-    <Paper>
+    <Paper className={classes.newField}>
       <form>
-        <Typography>Add Field</Typography>
+        <Typography>Create New Field</Typography>
         <TextField name="name" label="Name"></TextField>
         <TextField name="cost" label="Cost"></TextField>
         <TextField name="rating" label="Rating"></TextField>

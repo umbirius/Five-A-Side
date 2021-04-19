@@ -32,7 +32,7 @@ export default function NewField() {
             console.log(newField);
           }}
         >
-          <AddLocationIcon style={{ fontSize: 50}}/>
+          <AddLocationIcon style={{ fontSize: 40}}/>
         </button>
       )}
     </div>

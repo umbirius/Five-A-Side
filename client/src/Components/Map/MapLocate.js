@@ -29,7 +29,7 @@ export default function Locate({ panTo }) {
         // );
       }}
     >
-      <PersonPinIcon style={{ fontSize: 50 }}/>
+      <PersonPinIcon style={{ fontSize: 40 }}/>
     </button>
   );
 }

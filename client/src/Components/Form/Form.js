@@ -18,6 +18,9 @@ const Form = () => {
         <TextField name="cost" label="Cost"></TextField>
         <TextField name="rating" label="Rating"></TextField>
         <TextField name="location" label="Location"></TextField>
+        <Button> Submit</Button>
+        <Button> Click on Map</Button>
+        <Button> Cancel</Button>
       </form>
 
     </Paper>

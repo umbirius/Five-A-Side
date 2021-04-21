@@ -3,6 +3,9 @@ export default (fields = [], action) => {
     case "FETCH_ALL":
       return action.payload;
 
+      case "CREATE":
+        return [...fields, action.payload]
+
     default:
       return fields;
   }

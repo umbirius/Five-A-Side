@@ -11,5 +11,13 @@ export const getFields = () => async (dispatch) => {
         console.log(error.message)
         console.log("go fix it")
     }
+}
 
+export const createField = (field) => async (dispatch) => {
+    try {
+        const { data } = await api.createField(field)
+        dispatch({ type: 'CREATE', payload: data})
+    } catch (error) {
+        console.log(error.message)
+    }
 }

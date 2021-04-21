@@ -8,7 +8,8 @@ import useStyles from "./styles";
 
 const Form = () => {
   //   const [fieldData, setFieldData] = useState({});
-  const classes = useStyles()
+  const classes = useStyles();
+  const [newField, setNew] = useState(false);
 
   return (
     <Paper className={classes.newField}>
@@ -18,13 +19,25 @@ const Form = () => {
         <TextField name="cost" label="Cost"></TextField>
         <TextField name="rating" label="Rating"></TextField>
         <TextField name="location" label="Location"></TextField>
-        <Button> Submit</Button>
-        <Button> Click on Map</Button>
-        <Button> Cancel</Button>
+        <Button
+          onClick={() => {
+            console.log("create new field");
+          }}
+        >
+          {" "}
+          Submit
+        </Button>
+        <Button
+          onClick={() => {
+            console.log("close form");
+          }}
+        >
+          {" "}
+          Cancel
+        </Button>
       </form>
-
     </Paper>
   );
 };
 
-export default Form
+export default Form;

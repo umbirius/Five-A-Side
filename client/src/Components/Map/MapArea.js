@@ -70,7 +70,7 @@ const MapArea = () => {
     mapRef.current = map;
   }, []);
 
-  //pan to specific location on the map
+  //pan to specific location on the map, passes as prop to Locate and Search
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);

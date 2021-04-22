@@ -1,13 +1,15 @@
 import React from "react";
 import useStyles from "./styles2";
-import PersonPinIcon from '@material-ui/icons/PersonPin';
+import PersonPinIcon from "@material-ui/icons/PersonPin";
+import { Fab } from "@material-ui/core";
 
 export default function Locate({ panTo }) {
   const classes = useStyles();
 
   return (
     // <button className={classes.locate} onClick= {() => console.log("ere")}>
-    <button className={classes.locate}
+    <Fab
+      className={classes.locate}
       onClick={() => {
         console.log("button clicked for location set up function later");
         navigator.geolocation.getCurrentPosition(
@@ -29,7 +31,7 @@ export default function Locate({ panTo }) {
         // );
       }}
     >
-      <PersonPinIcon style={{ fontSize: 40 }}/>
-    </button>
+      <PersonPinIcon style={{ fontSize: 40 }} />
+    </Fab>
   );
 }

@@ -7,7 +7,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 
-import styles from "./styles";
+import styles from "./mapStyle";
 
 import Search from "./MapSearch";
 import Locate from "./MapLocate";

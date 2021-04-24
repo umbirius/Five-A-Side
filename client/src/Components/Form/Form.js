@@ -28,7 +28,7 @@ const Form = () => {
   return (
     <Paper className={classes.form} elevation={10}>
       <form autoComplete="off">
-        <Typography>Create New Field</Typography>
+        <Typography className={classes.header}>Create New Field</Typography>
         <TextField
           className={classes.inputField}
           name="name"

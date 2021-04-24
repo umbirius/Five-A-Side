@@ -11,6 +11,8 @@ export default makeStyles(() => ({
     alignItems: "center",
     display: "flex",
     border: "",
+    textAlign: 'center', 
+    padding: '12px'
   },
 
   button: {
@@ -20,15 +22,16 @@ export default makeStyles(() => ({
       alignItems: "center", 
       margin:"3px",
       width: "50%", 
-      justifyContent: "center"
+      justifyContent: "center",
+
   },
 
   inputField: {
     width: "60%",
-    margin: "10px"
+    margin: "10px",
   },
 
   header: {
-      
+      fontSize: "32"
   }
 }));

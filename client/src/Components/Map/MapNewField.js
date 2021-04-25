@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Form from "../Form/Form";
 import useStyles from "./styles2";
 import AddLocationIcon from "@material-ui/icons/AddLocation";
 import { Fab } from "@material-ui/core";
+import { newField } from "../../actions/fields";
 
 export default function NewField() {
   // capture state to create new field
-  const [newField, setNew] = useState(false);
+  const newFieldStatus = useSelector((state) => state.newFieldToggle)
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   return (
@@ -15,13 +18,13 @@ export default function NewField() {
         className={classes.newField}
         onClick={() => {
           // console.log("new field enabled")
-          setNew(true);
-          console.log(newField);
+          dispatch(newField())
+          console.log(newFieldStatus);
         }}
       >
         <AddLocationIcon style={{ fontSize: 40 }} />
       </Fab>{" "}
-      {newField && <Form></Form>}
+      {newFieldStatus && <Form></Form>}
     </div>
   );
 }

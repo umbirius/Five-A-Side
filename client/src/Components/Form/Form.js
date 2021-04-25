@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { newField } from "../../actions/fields";
 
 // import actions to create a field here
 // import reducer methods from react-redux
@@ -9,7 +11,9 @@ import useStyles from "./styles";
 const Form = () => {
   //   const [fieldData, setFieldData] = useState({});
   const classes = useStyles();
-  const [newField, setNew] = useState(false);
+  const dispatch = useDispatch();
+  const newFieldStatus = useSelector((state) => state.newFieldToggle);
+
   const [fieldData, setFieldData] = useState({
     name: "",
     cost: "",
@@ -28,7 +32,9 @@ const Form = () => {
   return (
     <Paper className={classes.form} elevation={10}>
       <form autoComplete="off">
-        <Typography variant="h5" className={classes.header}>Create New Field</Typography>
+        <Typography variant="h5" className={classes.header}>
+          Create New Field
+        </Typography>
         <TextField
           className={classes.inputField}
           name="name"
@@ -72,8 +78,8 @@ const Form = () => {
           className={classes.button}
           variant="contained"
           onClick={() => {
-            console.log("close form")
-            console.log(newField);
+            dispatch(newField());
+            console.log(newFieldStatus);
           }}
         >
           {" "}

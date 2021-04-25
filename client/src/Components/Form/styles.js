@@ -32,6 +32,7 @@ export default makeStyles(() => ({
   },
 
   header: {
-      fontSize: "32"
+      fontSize: "32",
+      fontFamily: "BlinkMacSystemFont"
   }
 }));

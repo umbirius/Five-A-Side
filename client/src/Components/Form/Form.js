@@ -28,7 +28,7 @@ const Form = () => {
   return (
     <Paper className={classes.form} elevation={10}>
       <form autoComplete="off">
-        <Typography className={classes.header}>Create New Field</Typography>
+        <Typography variant="h5" className={classes.header}>Create New Field</Typography>
         <TextField
           className={classes.inputField}
           name="name"
@@ -72,7 +72,8 @@ const Form = () => {
           className={classes.button}
           variant="contained"
           onClick={() => {
-            console.log("close form");
+            console.log("close form")
+            console.log(newField);
           }}
         >
           {" "}

@@ -53,14 +53,14 @@ const Form = () => {
         <TextField
           className={classes.inputField}
           name="cost"
-          label="Cost"
+          label="Cost (0-5)"
           value={fieldData.cost}
           onChange={(e) => setFieldData({ ...fieldData, cost: e.target.value })}
         ></TextField>
         <TextField
           className={classes.inputField}
           name="rating"
-          label="Rating"
+          label="Rating (0-5)"
           value={fieldData.rating}
           onChange={(e) =>
             setFieldData({ ...fieldData, rating: e.target.value })

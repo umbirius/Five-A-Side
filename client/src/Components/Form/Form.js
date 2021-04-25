@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newField } from "../../actions/fields";
+import ImageUploader from "react-images-upload";
 
 // import actions to create a field here
 // import reducer methods from react-redux
@@ -16,9 +17,10 @@ const Form = () => {
 
   const [fieldData, setFieldData] = useState({
     name: "",
+    location: "",
     cost: "",
     rating: "",
-    location: "",
+    images: [],
   });
 
   useEffect(() => {
@@ -44,6 +46,12 @@ const Form = () => {
         ></TextField>
         <TextField
           className={classes.inputField}
+          name="location"
+          label="Location"
+          value={fieldData.location}
+        ></TextField>
+        <TextField
+          className={classes.inputField}
           name="cost"
           label="Cost"
           value={fieldData.cost}
@@ -58,12 +66,14 @@ const Form = () => {
             setFieldData({ ...fieldData, rating: e.target.value })
           }
         ></TextField>
-        <TextField
-          className={classes.inputField}
-          name="location"
-          label="Location"
-          value={fieldData.location}
-        ></TextField>
+        <ImageUploader
+          withIcon={false}
+          buttonText="Choose images"
+          withPreview={true}
+          onChange={(imgs) => setFieldData({ ...fieldData, images: imgs })}
+          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+          maxFileSize={5242880}
+        />
         <Button
           className={classes.button}
           variant="contained"

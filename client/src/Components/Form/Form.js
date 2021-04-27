@@ -2,7 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newField } from "../../actions/fields";
 import ImageUploader from "react-images-upload";
-
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
 // import actions to create a field here
 // import reducer methods from react-redux
 
@@ -17,10 +27,26 @@ const Form = () => {
 
   const [fieldData, setFieldData] = useState({
     name: "",
-    location: "",
+    location: { name: "", lat: "", lng: "" },
     cost: "",
     rating: "",
     images: [],
+  });
+
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      location: {
+        lat: () => 40.728157,
+        lng: () => -74.077644,
+      },
+      radius: 200000,
+    },
   });
 
   useEffect(() => {
@@ -28,7 +54,13 @@ const Form = () => {
   });
 
   const clear = () => {
-    setFieldData({ name: "", cost: "", rating: "", location: "" });
+    setFieldData({
+      name: "",
+      cost: "",
+      rating: "",
+      location: { name: "", lat: "", lng: "" },
+      images: [],
+    });
   };
 
   return (
@@ -44,11 +76,45 @@ const Form = () => {
           value={fieldData.name}
           onChange={(e) => setFieldData({ ...fieldData, name: e.target.value })}
         ></TextField>
+        <Combobox
+          onSelect={async (address) => {
+            setValue(address, false);
+            clearSuggestions();
+            try {
+              const results = await getGeocode({ address });
+              const { lat, lng } = await getLatLng(results[0]);
+              setFieldData({
+                ...fieldData,
+                location: { name: address, lat: lat, lng: lng },
+              });
+            } catch (error) {
+              console.log(error);
+            }
+            console.log(address);
+          }}
+        >
+          <ComboboxInput
+            value={fieldData.location.name}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+            disabled={!ready}
+            placeholder="Search for Field"
+          />
+          <ComboboxPopover>
+            <ComboboxList>
+              {status === "OK" &&
+                data.map(({ place_id, description }) => (
+                  <ComboboxOption key={place_id} value={description} />
+                ))}
+            </ComboboxList>
+          </ComboboxPopover>
+        </Combobox>
         <TextField
           className={classes.inputField}
           name="location"
           label="Location"
-          value={fieldData.location}
+          value={fieldData.location.name}
         ></TextField>
         <TextField
           className={classes.inputField}

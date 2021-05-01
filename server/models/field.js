@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const fieldSchema = new mongoose.Schema({
   name: String,
-  location: { lat: Number, lng: Number },
+  location: { name: String, lat: Number, lng: Number },
   cost: {
     type: Number,
     default: 0,

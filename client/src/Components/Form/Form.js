@@ -9,15 +9,6 @@ import usePlacesAutocomplete, {
 import useOnclickOutside from "react-cool-onclickoutside";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxPopover,
-//   ComboboxList,
-//   ComboboxOption,
-// } from "@reach/combobox";
-// import actions to create a field here
-// import reducer methods from react-redux
 
 import { TextField, Button, Typography, Paper, Grid } from "@material-ui/core";
 import useStyles from "./styles";
@@ -123,9 +114,6 @@ const Form = () => {
           </Grid>
         </Grid>
 
-        // <li key={place_id} onClick={handleSelect(suggestion)}>
-        //   <strong>{main_text}</strong> <small>{secondary_text}</small>
-        // </li>
       );
     });
 
@@ -216,38 +204,3 @@ const Form = () => {
 
 export default Form;
 
-/* <Combobox
-          onSelect={async (address) => {
-            setValue(address, false);
-            clearSuggestions();
-            try {
-              const results = await getGeocode({ address });
-              const { lat, lng } = await getLatLng(results[0]);
-              setFieldData({
-                ...fieldData,
-                location: { name: address, lat: lat, lng: lng },
-              });
-            } catch (error) {
-              console.log(error);
-            }
-            console.log(address);
-          }}
-        >
-          <ComboboxInput
-            value={fieldData.location.name}
-            onChange={(e) => {
-              setValue(e.target.value);
-            }}
-            disabled={!ready}
-            placeholder="Search for Field"
-          />
-          <ComboboxPopover>
-            <ComboboxList>
-              {status === "OK" &&
-                data.map(({ place_id, description }) => (
-                  <ComboboxOption key={place_id} value={description} />
-                ))}
-            </ComboboxList>
-          </ComboboxPopover>
-        </Combobox>
-        */

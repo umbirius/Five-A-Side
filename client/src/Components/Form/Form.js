@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { newField } from "../../actions/fields";
+import { getFields, newField } from "../../actions/fields";
 import ImageUploader from "react-images-upload";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
+import useOnclickOutside from "react-cool-onclickoutside";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+
+// import {
+//   Combobox,
+//   ComboboxInput,
+//   ComboboxPopover,
+//   ComboboxList,
+//   ComboboxOption,
+// } from "@reach/combobox";
 // import actions to create a field here
 // import reducer methods from react-redux
 
-import { TextField, Button, Typography, Paper } from "@material-ui/core";
+import { TextField, Button, Typography, Paper, Grid } from "@material-ui/core";
 import useStyles from "./styles";
 
 const Form = () => {
@@ -63,6 +66,69 @@ const Form = () => {
     });
   };
 
+  const ref = useOnclickOutside(() => {
+    // When user clicks outside of the component, we can dismiss
+    // the searched suggestions by calling this method
+    clearSuggestions();
+  });
+
+  const handleInput = (e) => {
+    // Update the keyword of the input element
+    setValue(e.target.value);
+    setFieldData({ ...fieldData, location: { name: e.target.value } });
+    console.log(`handle Input: ${e.target.value}`);
+  };
+
+  const handleSelect = ({ description }) => () => {
+    // When user selects a place, we can replace the keyword without request data from API
+    // by setting the second parameter to "false"
+    setValue(description, false);
+    // console.log(`handle select: ${value}`);
+    clearSuggestions();
+
+    // Get latitude and longitude via utility functions
+    getGeocode({ address: description })
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        console.log("📍 Coordinates: ", { lat, lng });
+        setFieldData({
+          ...fieldData,
+          location: { name: description, lat: lat, lng: lng },
+        });
+      })
+      .catch((error) => {
+        console.log("😱 Error: ", error);
+      });
+  };
+
+  const renderSuggestions = () =>
+    data.map((suggestion) => {
+      const {
+        place_id,
+        structured_formatting: { main_text, secondary_text },
+      } = suggestion;
+
+      return (
+        <Grid container alignItems="center">
+          <Grid item>
+            <LocationOnIcon className={classes.icon} />
+          </Grid>
+          <Grid item xs onClick={handleSelect(suggestion)}>
+            <Typography key={place_id} variant="body1" color="textPrimary">
+              {main_text}
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              {secondary_text}
+            </Typography>
+          </Grid>
+        </Grid>
+
+        // <li key={place_id} onClick={handleSelect(suggestion)}>
+        //   <strong>{main_text}</strong> <small>{secondary_text}</small>
+        // </li>
+      );
+    });
+
   return (
     <Paper className={classes.form} elevation={10}>
       <form autoComplete="off">
@@ -76,46 +142,18 @@ const Form = () => {
           value={fieldData.name}
           onChange={(e) => setFieldData({ ...fieldData, name: e.target.value })}
         ></TextField>
-        <Combobox
-          onSelect={async (address) => {
-            setValue(address, false);
-            clearSuggestions();
-            try {
-              const results = await getGeocode({ address });
-              const { lat, lng } = await getLatLng(results[0]);
-              setFieldData({
-                ...fieldData,
-                location: { name: address, lat: lat, lng: lng },
-              });
-            } catch (error) {
-              console.log(error);
-            }
-            console.log(address);
-          }}
-        >
-          <ComboboxInput
+        <div ref={ref}>
+          <TextField
+            className={classes.inputField}
+            name="location"
+            label="Location"
             value={fieldData.location.name}
-            onChange={(e) => {
-              setValue(e.target.value);
-            }}
+            onChange={handleInput}
             disabled={!ready}
-            placeholder="Search for Field"
-          />
-          <ComboboxPopover>
-            <ComboboxList>
-              {status === "OK" &&
-                data.map(({ place_id, description }) => (
-                  <ComboboxOption key={place_id} value={description} />
-                ))}
-            </ComboboxList>
-          </ComboboxPopover>
-        </Combobox>
-        <TextField
-          className={classes.inputField}
-          name="location"
-          label="Location"
-          value={fieldData.location.name}
-        ></TextField>
+          ></TextField>
+          {/* We can use the "status" to decide whether we should display the dropdown or not */}
+          {status === "OK" && <ul>{renderSuggestions()}</ul>}
+        </div>
         <TextField
           className={classes.inputField}
           name="cost"
@@ -177,3 +215,39 @@ const Form = () => {
 };
 
 export default Form;
+
+/* <Combobox
+          onSelect={async (address) => {
+            setValue(address, false);
+            clearSuggestions();
+            try {
+              const results = await getGeocode({ address });
+              const { lat, lng } = await getLatLng(results[0]);
+              setFieldData({
+                ...fieldData,
+                location: { name: address, lat: lat, lng: lng },
+              });
+            } catch (error) {
+              console.log(error);
+            }
+            console.log(address);
+          }}
+        >
+          <ComboboxInput
+            value={fieldData.location.name}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+            disabled={!ready}
+            placeholder="Search for Field"
+          />
+          <ComboboxPopover>
+            <ComboboxList>
+              {status === "OK" &&
+                data.map(({ place_id, description }) => (
+                  <ComboboxOption key={place_id} value={description} />
+                ))}
+            </ComboboxList>
+          </ComboboxPopover>
+        </Combobox>
+        */

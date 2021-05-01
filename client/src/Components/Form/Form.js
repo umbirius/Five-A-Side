@@ -100,6 +100,7 @@ const Form = () => {
       } = suggestion;
 
       return (
+      // refactor later
         <Grid container alignItems="center">
           <Grid item>
             <LocationOnIcon className={classes.icon} />

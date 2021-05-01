@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFields, newField } from "../../actions/fields";
+import { createField, newField } from "../../actions/fields";
 import ImageUploader from "react-images-upload";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -8,7 +8,6 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-
 
 import { TextField, Button, Typography, Paper, Grid } from "@material-ui/core";
 import useStyles from "./styles";
@@ -100,7 +99,7 @@ const Form = () => {
       } = suggestion;
 
       return (
-      // refactor later
+        // refactor later
         <Grid container alignItems="center">
           <Grid item>
             <LocationOnIcon className={classes.icon} />
@@ -114,13 +113,19 @@ const Form = () => {
             </Typography>
           </Grid>
         </Grid>
-
       );
     });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(createField(fieldData));
+    dispatch(newField());
+  };
+
   return (
     <Paper className={classes.form} elevation={10}>
-      <form autoComplete="off">
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <Typography variant="h5" className={classes.header}>
           Create New Field
         </Typography>
@@ -170,6 +175,7 @@ const Form = () => {
         <Button
           className={classes.button}
           variant="contained"
+          type="submit"
           onClick={() => {
             console.log("create new field");
           }}
@@ -204,4 +210,3 @@ const Form = () => {
 };
 
 export default Form;
-

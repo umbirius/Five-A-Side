@@ -11,7 +11,8 @@ import styles from "./mapStyle";
 
 import Search from "./MapSearch";
 import Locate from "./MapLocate";
-import NewField from "./MapNewField"
+import NewField from "./MapNewField";
+import { Typography } from "@material-ui/core";
 
 const libraries = ["places"];
 
@@ -92,10 +93,10 @@ const MapArea = () => {
         onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
+        {fields.map((marker) => (
           <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
+            key={marker.__id}
+            position={{ lat: marker.location.lat, lng: marker.location.lng }}
             icon={{
               url: "/field.svg",
               scaledSize: new window.google.maps.Size(30, 30),
@@ -108,28 +109,29 @@ const MapArea = () => {
             }}
           />
         ))}
-        {selected ? (
+        {selected && (
           <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
+            position={{
+              lat: selected.location.lat,
+              lng: selected.location.lng,
+            }}
             onCloseClick={() => {
               setSelected(null);
             }}
           >
             <div>
-              <h2>Field</h2>
-              <p>
-                <ul>Times</ul>
-                <ul>Cost</ul>
-                <ul>Days</ul>
-              </p>
+              <Typography variant="h6">{selected.name}</Typography>
+              <Typography variant="body2">
+                {selected.location.name}
+              </Typography>
+              <Typography variant="body1">Cost: {selected.cost}</Typography>
+              <Typography variant="body1">Rating: {selected.rating}</Typography>
             </div>
           </InfoWindow>
-        ) : null}
+        )}
       </GoogleMap>
     </div>
   );
 };
 
 export default MapArea;
-
-

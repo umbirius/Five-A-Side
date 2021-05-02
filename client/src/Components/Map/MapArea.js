@@ -1,18 +1,13 @@
 import React, { useState, useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 import styles from "./mapStyle";
 
 import Search from "./MapSearch";
 import Locate from "./MapLocate";
 import NewField from "./MapNewField";
-import { Typography } from "@material-ui/core";
+import PopUpCard from "../Fields/Field/PopUpCard";
 
 const libraries = ["places"];
 
@@ -110,24 +105,7 @@ const MapArea = () => {
           />
         ))}
         {selected && (
-          <InfoWindow
-            position={{
-              lat: selected.location.lat,
-              lng: selected.location.lng,
-            }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div>
-              <Typography variant="h6">{selected.name}</Typography>
-              <Typography variant="body2">
-                {selected.location.name}
-              </Typography>
-              <Typography variant="body1">Cost: {selected.cost}</Typography>
-              <Typography variant="body1">Rating: {selected.rating}</Typography>
-            </div>
-          </InfoWindow>
+          <PopUpCard setSelected={setSelected} selected={selected}></PopUpCard>
         )}
       </GoogleMap>
     </div>

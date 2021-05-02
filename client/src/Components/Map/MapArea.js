@@ -99,7 +99,7 @@ const MapArea = () => {
             position={{ lat: marker.location.lat, lng: marker.location.lng }}
             icon={{
               url: "/field.svg",
-              scaledSize: new window.google.maps.Size(30, 30),
+              scaledSize: new window.google.maps.Size(25, 25),
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
             }}

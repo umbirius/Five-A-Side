@@ -9,6 +9,7 @@ import usePlacesAutocomplete, {
 
 import useOnclickOutside from "react-cool-onclickoutside";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import SearchIcon from "@material-ui/icons/Search";
 
 import useStyles from "./styles2";
 
@@ -89,15 +90,20 @@ export default function Search({ panTo }) {
 
   return (
     <div>
-      <TextField className={classes.search}
-        ref={ref}
-        label="Search for Field"
-        value={value}
-        onChange={handleInput}
-        disabled={!ready}
-      ></TextField>
+      <div className={classes.search}>
+        <div className={classes.searchIcon}>
+          <SearchIcon />
+        </div>
+        <TextField
+          ref={ref}
+          label="Search for Field"
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+        ></TextField>
+      </div>
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
-      {status === "OK" && <ul>{renderSuggestions()}</ul>}
+      {status === "OK" && <ul className={classes.suggestions}>{renderSuggestions()}</ul>}
     </div>
   );
 }

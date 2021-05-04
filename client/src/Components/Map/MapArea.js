@@ -8,6 +8,7 @@ import Search from "./MapSearch";
 import Locate from "./MapLocate";
 import NewField from "./MapNewField";
 import PopUpCard from "../Fields/Field/PopUpCard";
+import Navbar from "../Containers/NavBar/NavBar"
 
 const libraries = ["places"];
 
@@ -77,7 +78,7 @@ const MapArea = () => {
 
   return (
     <div>
-      <Search panTo={panTo}></Search>
+      <Navbar panTo={panTo}></Navbar>
       <Locate panTo={panTo}></Locate>
       <NewField></NewField>
       <GoogleMap

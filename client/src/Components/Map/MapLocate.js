@@ -31,7 +31,7 @@ export default function Locate({ panTo }) {
         // );
       }}
     >
-      <PersonPinIcon style={{ fontSize: 40 }} />
+      <PersonPinIcon style={{ fontSize: 30 }} />
     </Fab>
   );
 }

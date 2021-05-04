@@ -44,8 +44,8 @@ export default makeStyles((theme) => ({
     border: "none",
     zIndex: "10",
     color: "white",
-    width: "3rem",
-    height: "3rem",
+    width: "2.5rem",
+    height: "2.5rem",
     borderRadius: "50%",
   },
 
@@ -57,9 +57,13 @@ export default makeStyles((theme) => ({
     border: "none",
     zIndex: "10",
     color: "white",
-    width: "3rem",
-    height: "3rem",
+    width: "2.5rem",
+    height: "2.5rem",
     borderRadius: "50%",
+  },
+
+  icon: {
+    fontSize: "50"
   },
 
   suggestions: {

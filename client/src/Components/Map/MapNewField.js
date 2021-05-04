@@ -22,7 +22,7 @@ export default function NewField() {
           console.log(newFieldStatus);
         }}
       >
-        <AddLocationIcon style={{ fontSize: 40 }} />
+        <AddLocationIcon style={{ fontSize: 30 }} />
       </Fab>{" "}
       {newFieldStatus && <Form></Form>}
     </div>
